@@ -1,4 +1,4 @@
-package com.danielge.nfcskeleton;
+package org.danielge.nfcskeleton;
 
 import android.app.Activity;
 import android.app.PendingIntent;
