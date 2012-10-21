@@ -47,9 +47,13 @@ public abstract class NdefReaderActivity extends Activity {
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
         adapter.enableForegroundDispatch(this, pendingIntent, filters, null);
+
+        readMode = true;
     }
 
     protected void disableReadTagMode() {
+        readMode = false;
+
         NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
         adapter.disableForegroundDispatch(this);
     }
