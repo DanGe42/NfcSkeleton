@@ -17,16 +17,24 @@ public abstract class NdefReaderActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        if (getIntent() != null && ndefTagFilter(getIntent())) {
+            doNdefIntent(getIntent());
+        }
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         if (ndefTagFilter(intent)) {
-            Ndef ndef = Ndef.get((Tag) intent.getParcelableExtra(NfcAdapter.EXTRA_TAG));
-            NdefMessage message = ndef.getCachedNdefMessage();
-
-            onNdefMessage(message);
+            doNdefIntent(intent);
         }
+    }
+
+    private void doNdefIntent(Intent intent) {
+        Ndef ndef = Ndef.get((Tag) intent.getParcelableExtra(NfcAdapter.EXTRA_TAG));
+        NdefMessage message = ndef.getCachedNdefMessage();
+
+        onNdefMessage(message);
     }
 
     protected abstract void onNdefMessage (NdefMessage message);
