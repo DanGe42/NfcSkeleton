@@ -19,14 +19,15 @@ public abstract class NfcWriterActivity extends Activity {
     private static IntentFilter buildWriteFilter() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(NfcAdapter.ACTION_TAG_DISCOVERED);
-        filter.addCategory("android.intent.category.DEFAULT");
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
 
         return filter;
     }
 
     private boolean writeMode = false;
 
-    public void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
