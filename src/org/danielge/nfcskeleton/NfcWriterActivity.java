@@ -45,27 +45,36 @@ public abstract class NfcWriterActivity extends Activity {
 
     protected abstract void onTagDiscovered (Tag tag);
 
-    protected void enableWriteTagMode(IntentFilter[] additionalFilters, String[][] techlist) {
+    public void enableWriteTagMode() {
+        enableWriteTagMode(null, null);
+    }
+
+    public void enableWriteTagMode(IntentFilter[] additionalFilters, String[][] techlist) {
         NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
         Intent intent = new Intent(this, getClass());
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-        IntentFilter[] filters = Arrays.copyOf(additionalFilters, additionalFilters.length + 1);
-        filters[additionalFilters.length - 1] = WRITE_FILTER;
+        IntentFilter[] filters;
+        if (additionalFilters != null && additionalFilters.length > 0) {
+            filters = Arrays.copyOf(additionalFilters, additionalFilters.length + 1);
+            filters[additionalFilters.length - 1] = WRITE_FILTER;
+        } else {
+            filters = new IntentFilter[] { WRITE_FILTER };
+        }
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-        adapter.enableForegroundDispatch(this, pendingIntent, additionalFilters, techlist);
+        adapter.enableForegroundDispatch(this, pendingIntent, filters, techlist);
 
         writeMode = true;
     }
 
-    protected void disableWriteTagMode() {
+    public void disableWriteTagMode() {
         writeMode = false;
         NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
         adapter.disableForegroundDispatch(this);
     }
 
-    protected final boolean inWriteMode() {
+    public final boolean inWriteMode() {
         return writeMode;
     }
 }
