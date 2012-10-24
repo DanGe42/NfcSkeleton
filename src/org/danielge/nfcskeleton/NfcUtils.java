@@ -9,9 +9,27 @@ import android.util.Log;
 
 import java.io.IOException;
 
+/**
+ * A collection of utilities useful for interacting with NFC tags.
+ */
 public class NfcUtils {
     public static final String TAG = NfcUtils.class.getSimpleName();
 
+    // TODO: finish documentation for the @throws list
+    /**
+     * Writes an NDEF message to an NFC tag. If the tag is not already
+     * formatted with NDEF, this will attempt to format the tag with the
+     * provided NDEF message.
+     *
+     * @param message   The NDEF message to write to the tag.
+     * @param tag   The tag
+     * @return  {@code true} if writing was successful, {@code false} otherwise
+     *
+     * @throws IOException
+     * @throws FormatException
+     * @throws TagNotWritableException
+     * @throws NdefMessageTooLongException
+     */
     public static boolean writeNdefTag (NdefMessage message, Tag tag)
             throws IOException, FormatException, TagNotWritableException, NdefMessageTooLongException {
         int size = message.toByteArray().length;
