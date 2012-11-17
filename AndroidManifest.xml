@@ -12,6 +12,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".NfcWriterActivity"/>
+        <activity android:name=".NfcReaderActivity"/>
         <activity android:name=".NdefReaderActivity"/>
     </application>
 </manifest>
