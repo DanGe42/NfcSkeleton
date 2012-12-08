@@ -1,6 +1,6 @@
 NFC Skeleton
 ============
-Current version 0.0.1
+Current version 0.0.1. Modified BSD license
 
 A simple framework that makes it easy to write Android activities that can read
 or write NFC tags.
